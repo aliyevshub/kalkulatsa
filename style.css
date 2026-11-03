@@ -106,11 +106,17 @@ th, td {
   font-size: .92rem;
 }
 th { background: #f8fafc; color: var(--muted); font-weight: 600; }
+.tasks { min-width: 760px; }
 .tasks td input, .tasks td select { padding: 6px 8px; }
-.tasks td:first-child { width: 36px; color: var(--muted); }
-.tasks td:nth-child(3) { width: 90px; }
-.tasks td:nth-child(4) { width: 150px; }
-.tasks td:last-child { width: 44px; }
+.tasks td:first-child { color: var(--muted); }
+.tasks .c-num { width: 36px; }
+.tasks .c-prio { width: 110px; }
+.tasks .c-date { width: 150px; }
+.tasks .c-hours { width: 80px; }
+.tasks .c-status { width: 140px; }
+.tasks .c-del { width: 44px; }
+.tasks tr.overdue .t-deadline { border-color: var(--danger); color: var(--danger); }
+.badge.neutral { background: #94a3b8; }
 
 /* Tugmalar */
 .btn {

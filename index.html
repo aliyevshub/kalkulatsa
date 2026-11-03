@@ -20,15 +20,15 @@
       <fieldset>
         <legend>Xodim haqida ma'lumot</legend>
         <div class="grid">
-          <label>F.I.Sh. <span class="req">*</span>
+          <label><span>F.I.Sh. <span class="req">*</span></span>
             <input type="text" id="fullName" placeholder="Masalan: Aliyev Vali" required>
             <small class="error"></small>
           </label>
-          <label>Lavozimi <span class="req">*</span>
+          <label><span>Lavozimi <span class="req">*</span></span>
             <input type="text" id="position" placeholder="Masalan: Buxgalter" required>
             <small class="error"></small>
           </label>
-          <label>Bo'lim <span class="req">*</span>
+          <label><span>Bo'lim <span class="req">*</span></span>
             <select id="department" required>
               <option value="">— Tanlang —</option>
               <option>Moliya</option>
@@ -45,6 +45,20 @@
             <input type="tel" id="phone" placeholder="+998 90 123 45 67">
             <small class="error"></small>
           </label>
+          <label>Tabel raqami
+            <input type="text" id="employeeId" placeholder="Masalan: 0457">
+          </label>
+          <label>Elektron pochta
+            <input type="email" id="email" placeholder="ism@kompaniya.uz">
+            <small class="error"></small>
+          </label>
+          <label>Ishga kirgan sana
+            <input type="date" id="hireDate">
+            <small class="error"></small>
+          </label>
+          <label>Bevosita rahbar
+            <input type="text" id="manager" placeholder="Rahbarning F.I.Sh.">
+          </label>
         </div>
       </fieldset>
 
@@ -58,14 +72,44 @@
               <option>Oylik</option>
             </select>
           </label>
-          <label>Boshlanish sanasi <span class="req">*</span>
+          <label><span>Boshlanish sanasi <span class="req">*</span></span>
             <input type="date" id="dateFrom" required>
             <small class="error"></small>
           </label>
-          <label>Tugash sanasi <span class="req">*</span>
+          <label><span>Tugash sanasi <span class="req">*</span></span>
             <input type="date" id="dateTo" required>
             <small class="error"></small>
           </label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Davomat</legend>
+        <div class="grid">
+          <label>Ish kunlari (reja)
+            <input type="number" id="workDays" min="0" placeholder="0">
+            <small class="error"></small>
+          </label>
+          <label>Ishda bo'lgan kunlar
+            <input type="number" id="presentDays" min="0" placeholder="0">
+            <small class="error"></small>
+          </label>
+          <label>Kasallik kunlari
+            <input type="number" id="sickDays" min="0" placeholder="0">
+          </label>
+          <label>Ta'til kunlari
+            <input type="number" id="vacationDays" min="0" placeholder="0">
+          </label>
+          <label>Kechikishlar soni
+            <input type="number" id="lateCount" min="0" placeholder="0">
+          </label>
+          <label>Qo'shimcha ish soatlari
+            <input type="number" id="overtime" min="0" step="0.5" placeholder="0">
+          </label>
+        </div>
+        <div class="stats">
+          <div><span>Davomat</span><b id="statAttendance">—</b></div>
+          <div><span>Sababsiz yo'qlik (kun)</span><b id="statAbsent">0</b></div>
         </div>
       </fieldset>
 
@@ -75,11 +119,13 @@
           <table class="tasks">
             <thead>
               <tr>
-                <th>#</th>
+                <th class="c-num">#</th>
                 <th>Vazifa nomi</th>
-                <th>Soat</th>
-                <th>Holati</th>
-                <th></th>
+                <th class="c-prio">Muhimlik</th>
+                <th class="c-date">Muddat</th>
+                <th class="c-hours">Soat</th>
+                <th class="c-status">Holati</th>
+                <th class="c-del"></th>
               </tr>
             </thead>
             <tbody id="taskBody"></tbody>
@@ -92,6 +138,8 @@
           <div><span>Bajarildi</span><b id="statDone">0</b></div>
           <div><span>Jami soat</span><b id="statHours">0</b></div>
           <div><span>Bajarilish</span><b id="statPercent">0%</b></div>
+          <div><span>Jarayonda</span><b id="statProgress">0</b></div>
+          <div><span>Muddati o'tgan</span><b id="statOverdue">0</b></div>
         </div>
         <div class="progress"><div id="progressBar"></div></div>
       </fieldset>
@@ -107,6 +155,15 @@
         <label>Keyingi davr rejalari
           <textarea id="plans" rows="3" placeholder="Rejalashtirilgan ishlar..."></textarea>
         </label>
+        <label>Malaka oshirish va o'qishlar
+          <textarea id="training" rows="2" placeholder="Kurslar, seminarlar, sertifikatlar..."></textarea>
+        </label>
+        <label>Takliflar
+          <textarea id="suggestions" rows="2" placeholder="Ishni yaxshilash bo'yicha takliflar..."></textarea>
+        </label>
+        <label>Kerakli resurslar
+          <textarea id="resources" rows="2" placeholder="Jihozlar, dasturlar, yordam..."></textarea>
+        </label>
         <div class="rating-row">
           <span>O'z ishiga baho:</span>
           <div class="rating" id="rating">
@@ -117,6 +174,24 @@
             <button type="button" data-v="5">★</button>
           </div>
         </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Rahbar xulosasi</legend>
+        <div class="grid">
+          <label>Rahbar bahosi
+            <select id="managerGrade">
+              <option value="">— Baholanmagan —</option>
+              <option>A'lo</option>
+              <option>Yaxshi</option>
+              <option>Qoniqarli</option>
+              <option>Qoniqarsiz</option>
+            </select>
+          </label>
+        </div>
+        <label>Rahbar izohi
+          <textarea id="managerComment" rows="3" placeholder="Rahbarning fikri va tavsiyalari..."></textarea>
+        </label>
       </fieldset>
 
       <div class="actions">
@@ -143,6 +218,8 @@
               <th>Vazifalar</th>
               <th>Soat</th>
               <th>Bajarilish</th>
+              <th>Davomat</th>
+              <th>Rahbar bahosi</th>
               <th>Amallar</th>
             </tr>
           </thead>
