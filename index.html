@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xodimlar hisoboti</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1>Xodimlar hisoboti</h1>
+    <p>Bajarilgan ishlar bo'yicha kunlik / haftalik / oylik hisobot shakli</p>
+  </header>
+
+  <main class="container">
+    <form id="reportForm" class="card" novalidate>
+      <h2 id="formTitle">Yangi hisobot</h2>
+      <input type="hidden" id="reportId">
+
+      <fieldset>
+        <legend>Xodim haqida ma'lumot</legend>
+        <div class="grid">
+          <label>F.I.Sh. <span class="req">*</span>
+            <input type="text" id="fullName" placeholder="Masalan: Aliyev Vali" required>
+            <small class="error"></small>
+          </label>
+          <label>Lavozimi <span class="req">*</span>
+            <input type="text" id="position" placeholder="Masalan: Buxgalter" required>
+            <small class="error"></small>
+          </label>
+          <label>Bo'lim <span class="req">*</span>
+            <select id="department" required>
+              <option value="">— Tanlang —</option>
+              <option>Moliya</option>
+              <option>Kadrlar</option>
+              <option>Savdo</option>
+              <option>IT</option>
+              <option>Ishlab chiqarish</option>
+              <option>Logistika</option>
+              <option>Boshqa</option>
+            </select>
+            <small class="error"></small>
+          </label>
+          <label>Telefon
+            <input type="tel" id="phone" placeholder="+998 90 123 45 67">
+            <small class="error"></small>
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Hisobot davri</legend>
+        <div class="grid">
+          <label>Hisobot turi
+            <select id="reportType">
+              <option>Kunlik</option>
+              <option selected>Haftalik</option>
+              <option>Oylik</option>
+            </select>
+          </label>
+          <label>Boshlanish sanasi <span class="req">*</span>
+            <input type="date" id="dateFrom" required>
+            <small class="error"></small>
+          </label>
+          <label>Tugash sanasi <span class="req">*</span>
+            <input type="date" id="dateTo" required>
+            <small class="error"></small>
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Bajarilgan vazifalar</legend>
+        <div class="table-wrap">
+          <table class="tasks">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Vazifa nomi</th>
+                <th>Soat</th>
+                <th>Holati</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="taskBody"></tbody>
+          </table>
+        </div>
+        <button type="button" id="addTask" class="btn btn-light">+ Vazifa qo'shish</button>
+
+        <div class="stats">
+          <div><span>Jami vazifalar</span><b id="statTotal">0</b></div>
+          <div><span>Bajarildi</span><b id="statDone">0</b></div>
+          <div><span>Jami soat</span><b id="statHours">0</b></div>
+          <div><span>Bajarilish</span><b id="statPercent">0%</b></div>
+        </div>
+        <div class="progress"><div id="progressBar"></div></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Qo'shimcha</legend>
+        <label>Erishilgan natijalar
+          <textarea id="achievements" rows="3" placeholder="Asosiy yutuqlar..."></textarea>
+        </label>
+        <label>Muammolar va qiyinchiliklar
+          <textarea id="problems" rows="3" placeholder="Duch kelingan muammolar..."></textarea>
+        </label>
+        <label>Keyingi davr rejalari
+          <textarea id="plans" rows="3" placeholder="Rejalashtirilgan ishlar..."></textarea>
+        </label>
+        <div class="rating-row">
+          <span>O'z ishiga baho:</span>
+          <div class="rating" id="rating">
+            <button type="button" data-v="1">★</button>
+            <button type="button" data-v="2">★</button>
+            <button type="button" data-v="3">★</button>
+            <button type="button" data-v="4">★</button>
+            <button type="button" data-v="5">★</button>
+          </div>
+        </div>
+      </fieldset>
+
+      <div class="actions">
+        <button type="submit" class="btn btn-primary">Saqlash</button>
+        <button type="button" id="resetBtn" class="btn btn-light">Tozalash</button>
+      </div>
+    </form>
+
+    <section class="card">
+      <div class="list-head">
+        <h2>Saqlangan hisobotlar</h2>
+        <div class="list-tools">
+          <input type="search" id="search" placeholder="Qidirish (ism, bo'lim)...">
+          <button type="button" id="exportCsv" class="btn btn-light">CSV yuklab olish</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="reports">
+          <thead>
+            <tr>
+              <th>F.I.Sh.</th>
+              <th>Bo'lim</th>
+              <th>Davr</th>
+              <th>Vazifalar</th>
+              <th>Soat</th>
+              <th>Bajarilish</th>
+              <th>Amallar</th>
+            </tr>
+          </thead>
+          <tbody id="reportBody"></tbody>
+        </table>
+      </div>
+      <p id="emptyMsg" class="empty">Hozircha hisobotlar yo'q.</p>
+    </section>
+  </main>
+
+  <div id="toast" class="toast"></div>
+
+  <!-- Chop etish uchun ko'rinish -->
+  <div id="printArea" class="print-area"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
