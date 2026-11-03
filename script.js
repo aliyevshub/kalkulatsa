@@ -257,7 +257,7 @@ function resetForm() {
   form.querySelectorAll(".invalid").forEach((el) => setError(el, ""));
   taskBody.innerHTML = "";
   setDefaultDates();
-  addTaskRow();
+  for (let i = 0; i < 3; i++) addTaskRow(); // yangi formada 3 ta bo'sh vazifa qatori
   setRating(0);
   $("formTitle").textContent = "Yangi hisobot";
 }
